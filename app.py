@@ -38,7 +38,6 @@ def api_recommend_article():
     # 5. 以下の形式で返却する.
     return json.dumps({
         "content": item,
-        # "link" : item.find("link").string
         "link": url
     })
     
@@ -57,7 +56,6 @@ def api_recommend_design():
     print(item)
     return json.dumps({
         "content": item.find(class_="c-box_title").text,
-        # "link" : item.find("link").string
         "link": url.get("href")
     })
 
@@ -79,13 +77,10 @@ def api_recommend_architecture():
         "link": url
     })
 
-# 2. JDN （デザイン）
-
-
+# 3. 美術手帖 （アート）
 @app.route("/api/recommend_art")
 def api_recommend_art():
 
-    # **** ここを実装します（発展課題） ****
     with urlopen("https://bijutsutecho.com/") as res:
         html = res.read().decode("utf-8")
     soup = BeautifulSoup(html, "html.parser")
@@ -97,7 +92,6 @@ def api_recommend_art():
     pprint(item)
     return json.dumps({
         "content": news.text,
-        # "link" : item.find("link").string
         "link": url.get("href")
     })
 
